@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE Xdmf SYSTEM "Xdmf.dtd" []>
+<Xdmf Version="3.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <Domain>
+    <Grid Name="composite" GridType="Uniform">
+      <Topology TopologyType="Triangle" NumberOfElements="3245" NodesPerElement="3">
+        <DataItem Dimensions="3245 3" NumberType="Int" Format="HDF">mesh.h5:/Mesh/composite/topology</DataItem>
+      </Topology>
+      <Geometry GeometryType="XY">
+        <DataItem Dimensions="1689 2" Format="HDF">mesh.h5:/Mesh/composite/geometry</DataItem>
+      </Geometry>
+    </Grid>
+    <Grid Name="composite_cells" GridType="Uniform">
+      <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@Name='composite']/Geometry)" />
+      <Topology TopologyType="Triangle" NumberOfElements="3245" NodesPerElement="3">
+        <DataItem Dimensions="3245 3" NumberType="Int" Format="HDF">mesh.h5:/MeshTags/composite_cells/topology</DataItem>
+      </Topology>
+      <Attribute Name="composite_cells" AttributeType="Scalar" Center="Cell">
+        <DataItem Dimensions="3245 1" Format="HDF">mesh.h5:/MeshTags/composite_cells/Values</DataItem>
+      </Attribute>
+    </Grid>
+    <Grid Name="composite_facets" GridType="Uniform">
+      <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@Name='composite']/Geometry)" />
+      <Topology TopologyType="PolyLine" NumberOfElements="150" NodesPerElement="2">
+        <DataItem Dimensions="150 2" NumberType="Int" Format="HDF">mesh.h5:/MeshTags/composite_facets/topology</DataItem>
+      </Topology>
+      <Attribute Name="composite_facets" AttributeType="Scalar" Center="Cell">
+        <DataItem Dimensions="150 1" Format="HDF">mesh.h5:/MeshTags/composite_facets/Values</DataItem>
+      </Attribute>
+    </Grid>
+  </Domain>
+</Xdmf>
